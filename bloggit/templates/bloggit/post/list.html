@@ -1,11 +1,14 @@
 {% extends "base.html" %}
+{% load blog_tags %}
 {% block title %}
   my blog
 {% endblock %}
 {% block content %}
 <div class="row">
   <div class="col-xs-12 col-md-8 col-md-offset-2">
-    <h1> let it fall ... </h1>
+    <h1> let it fall ...
+      <small> I have written {% total_posts %} posts so far</small>
+    </h1>
     <hr>
     {% for post in posts %}
     <section class="post-item">
@@ -15,7 +18,7 @@
       <p>
      Published by {{ post.author }} on {{ post.publish }}
       </p>
-      {{ post.content|truncatewords:30|linebreaks }}
+      {{ post.content|markdown|truncatewords_html:30 }}
     </section>
     {% endfor %}
   </div>
