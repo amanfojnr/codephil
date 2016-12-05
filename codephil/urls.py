@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from bloggit import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', views.post_list, name='list'),
     url(r'^blog/', include('bloggit.urls',
                            namespace='bloggit'))
 ]
