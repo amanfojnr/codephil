@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}
+  my blog
+{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-xs-12 col-md-8 col-md-offset-2">
+    <h1> let it fall ... </h1>
+    <hr>
+    {% for post in posts %}
+    <section class="post-item">
+      <h3>
+        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+      </h3>
+      <p>
+     Published by {{ post.author }} on {{ post.publish }}
+      </p>
+      {{ post.content|truncatewords:30|linebreaks }}
+    </section>
+    {% endfor %}
+  </div>
+</div>
+
+
+{% endblock %}

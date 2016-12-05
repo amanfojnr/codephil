@@ -1,6 +1,14 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+
+
+# model managers
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super(PublishedManager,self).get_queryset()\
+                                            .filter(status='published')
 
 # Create your models here.
 STATUS_CHOICES = (
@@ -35,11 +43,24 @@ class Post(models.Model):
                                 choices=STATUS_CHOICES,
                                 default='draft')
 
+    # managers
+    objects = models.Manager()   # default manager
+    published = PublishedManager()
+
     class Meta:
         ordering = ('-publish',)
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('bloggit:detail',
+                        args=[self.publish.year,
+                              self.publish.strftime('%m'),
+                              self.publish.strftime('%d'),
+                              self.slug])
+
+
 
 
 

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+  post.title
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-xs-12 col-md-8 col-md-offset-2">
+    <article class="content">
+      <div class="page-header">
+        <h1> {{ post.title }} </h1>
+        <p>
+       Published by {{ post.author }} on {{ post.publish }}
+        </p>
+      </div>
+
+      {{ post.content|truncatewords:30|linebreaks }}
+    </article>
+
+  </div>
+</div>
+
+
+{% endblock %}
