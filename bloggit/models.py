@@ -59,28 +59,3 @@ class Post(models.Model):
                               self.publish.strftime('%m'),
                               self.publish.strftime('%d'),
                               self.slug])
-
-
-
-
-
-
-class Comment(models.Model):
-    """ Comment class to create comment objects to
-        apply to database
-
-        post    post related
-        author  name of author of comment
-        content body of comment
-        publish datetime of posted comment
-        active  flag to decide disable and enable comment visibility
-    """
-    post = models.ForeignKey(Post,
-                                related_name='comments_created')
-    author = models.CharField(max_length=100)
-    content = models.TextField()
-    publish = models.DateTimeField(auto_now=True)
-    active  = models.BooleanField(default=True)
-
-    def __str__(self):
-        return self.author
