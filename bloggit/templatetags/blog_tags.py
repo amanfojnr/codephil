@@ -16,5 +16,11 @@ def total_posts():
 
 @register.filter(name='markdown')
 def markdown_format(text):
-    """ retuen markdowned version of text """
+    """ return markdowned version of text """
     return mark_safe(markdown.markdown(text))
+
+@register.inclusion_tag('bloggit/post/latest_posts.html')
+def show_latest_posts(count=5):
+    """ returns a list of latest posts """
+    latest_posts = Post.published.order_by("-publish")[:count]
+    return { 'latest_posts' : latest_posts}

@@ -12,5 +12,7 @@ urlpatterns = [
         r'(?P<post>[-\w]+)/$',
         views.post_detail, name='detail'),
     url(r'^sitemaps\.xml$', sitemap, {'sitemaps' : sitemaps },
-        name='django.contrib.sitemaps.views.sitemap')
+        name='django.contrib.sitemaps.views.sitemap'),
+    url(r'^tag/(?P<tag_slug>[-\w]+)/$', views.post_list,
+        name='post_list_by_tag')
 ]
